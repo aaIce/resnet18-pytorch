@@ -39,13 +39,14 @@ def detect(opt):
             images = images.to(device)
             pred = model(images)
             _, preds = torch.max(pred, 1)
-
+        value_ = sigmoid(_.cpu().numpy())
+        classes_ = preds.cpu().numpy()
         font = ImageFont.truetype(
             font='simhei.ttf',
             size=np.floor(3e-2 * max(w, h) + 0.5).astype('int32')
         )
         draw = ImageDraw.Draw(img)
-        draw.text((0, 0), f"cls:{preds},conf:{_}", fill=(255, 0, 0), font=font)
+        draw.text((0, 0), f"cls:{classes_},conf:{value_}", fill=(255, 0, 0), font=font)
         del draw
         img.show()
         img.save('textimage.jpg')
