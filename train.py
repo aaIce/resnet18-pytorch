@@ -84,7 +84,7 @@ if __name__ == "__main__":
     if opt.weights is 'empty':
         print("create model")
         print(f"{opt.numclasses} classes")
-        model = timm.create_model(opt.model, pretrained=False, num_classes=opt.numclasses)
+        model = timm.create_model(opt.model, pretrained=True, pretrained_cfg_overlay=dict(file='pytorch_model.bin'), num_classes=opt.numclasses)
     else:
         model = torch.load(opt.weights)
     # 定义损失函数
